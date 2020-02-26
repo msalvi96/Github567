@@ -35,7 +35,8 @@ class TestGetUser(unittest.TestCase):
         for i in expected:
             self.assertIn(i, output_list)
     
-    def test_mock_get_user(self):
+    @mock.patch('requests.get')
+    def test_mock_get_user(self, mock_get):
 
         response_mock = mock.Mock()
         response_mock.status_code = 200
@@ -58,8 +59,8 @@ class TestGetUser(unittest.TestCase):
 
         return response_mock
 
-    @mock.patch('requests.get')
-    def test_mock_user(self, mock_get):
+    
+    def test_mock_user(self):
         expected = [
             'Software-Testing',
             'delicious_food_blog',
