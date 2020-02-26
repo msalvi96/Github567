@@ -34,14 +34,9 @@ class TestGetUser(unittest.TestCase):
         output_list = get_user('msalvi96', debug=True)
         for i in expected:
             self.assertIn(i, output_list)
-
-    # def test_request_response(self):
-
-
-
-    @mock.patch('requests.get')
+    
     def test_mock_get_user(self, mock_get):
-        # with patch('github567.github_program.requests.get') as mock_get:
+
         response_mock = mock.Mock()
         response_mock.status_code = 200
 
@@ -63,8 +58,7 @@ class TestGetUser(unittest.TestCase):
 
         return response_mock
 
-        # mock_get.return_value = mock.Mock(ok=True)
-        # mock_get.return_value.json.return_value = value
+    @mock.patch('requests.get')
     def test_mock_user(self):
         expected = [
             'Software-Testing',
@@ -84,23 +78,13 @@ class TestGetUser(unittest.TestCase):
         requests = mock.Mock()
         requests.get.side_effect = self.test_mock_get_user
         x = get_user('msalvi96')
-        print(x)
         output = {}
         for i in x:
             output[i[0]] = i[1]
 
-        print(output)
-        # self.assertTrue(output['Software-Testing'] == 11)
         for key, values in output.items():
             self.assertIn(key, expected)
             self.assertIsInstance(values, int)
 
-        # self.assertTrue(get_user('msalvi96')['Software-Testing'] == 11)
-            
-
-        # assert_is_not_none(response)
-
 if __name__ == "__main__":
     unittest.main(exit=False, verbosity=2)
-    # x, y = get_user('msalvi96', debug=True)
-    # print(x, y)
