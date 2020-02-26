@@ -2,7 +2,7 @@ import unittest
 from github_program import get_user
 from unittest.mock import patch
 from nose.tools import assert_is_not_none
-from unittest.mock import Mock, patch
+from unittest import mock
 
 class TestGetUser(unittest.TestCase):
     def test_get_user(self):
@@ -34,12 +34,28 @@ class TestGetUser(unittest.TestCase):
         response = get_user('msalvi96')
         assert_is_not_none(response)
 
-    def test_mock_get_user(self):
-        with patch('github567.github_program.requests.get') as mock_get:
-            mock_get.return_value.ok = True
-            response = get_user('msalvi96')
+    @mock.patch('requests.get')
+    def test_mock_get_user(self, mock_get):
+        # with patch('github567.github_program.requests.get') as mock_get:
+        mock_get.return_value = [
+            ['Software-Testing', 11],
+            ['delicious_food_blog', 10],
+            ['CCAssist', 9],
+            ['Triangle-567', 8],
+            ['Portfolio', 7],
+            ['Twitter-Sentiment-Analysis', 6],
+            ['crypto_site', 5],
+            ['flask_RESTful', 4],
+            ['StevensRepo', 3],
+            ['GEDCOM_Project', 2]
+        ]
 
-        assert_is_not_none(response)
+        self.assertEqual(get_user('msalvi96'), mock_get())
+            
+
+        # assert_is_not_none(response)
 
 if __name__ == "__main__":
     unittest.main(exit=False, verbosity=2)
+    x, y = get_user('msalvi96', debug=True)
+    print(x, y)

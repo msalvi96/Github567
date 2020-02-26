@@ -6,18 +6,20 @@ def get_user(username, debug=False):
 
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     
-    if response.status_code != 200:
-        raise TimeoutError
+    # if response.status_code != 200:
+    #     raise TimeoutError
 
     summary = []
     repos = response.json()
+    print(repos)
 
     for rep in repos:
         commits = requests.get(f"https://api.github.com/repos/{username}/{rep['name']}/commits").json()
         summary.append([rep['name'], len(commits)])
 
     if debug:
-        return [repo[0] for repo in summary]
+        # return [repo[0] for repo in summary]
+        return response, repos
 
     return sorted(summary, key=itemgetter(1))
 
