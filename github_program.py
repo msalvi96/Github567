@@ -6,8 +6,8 @@ def get_user(username, debug=False):
 
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     
-    # if response.status_code != 200:
-    #     raise TimeoutError
+    if response.status_code != 200:
+        raise TimeoutError
 
     summary = []
     repos = response.json()
