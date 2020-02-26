@@ -65,11 +65,12 @@ class TestGetUser(unittest.TestCase):
         requests = mock.Mock()
         requests.get.side_effect = self.test_mock_get_user
         x = get_user('msalvi96')
-        # print(x)
+        print(x)
         output = {}
         for i in x:
             output[i[0]] = i[1]
 
+        print(output)
         self.assertTrue(output['Software-Testing'] == 11)
 
         # self.assertTrue(get_user('msalvi96')['Software-Testing'] == 11)
