@@ -37,7 +37,7 @@ class TestGetUser(unittest.TestCase):
     @mock.patch('requests.get')
     def test_mock_get_user(self, mock_get):
         # with patch('github567.github_program.requests.get') as mock_get:
-        mock_get.return_value = [
+        value = [
             ['Software-Testing', 11],
             ['delicious_food_blog', 10],
             ['CCAssist', 9],
@@ -50,12 +50,18 @@ class TestGetUser(unittest.TestCase):
             ['GEDCOM_Project', 2]
         ]
 
-        self.assertEqual(get_user('msalvi96'), mock_get())
+        mock_get.return_value = mock.Mock(ok=True)
+        mock_get.return_value.json.return_value = value
+
+        resp = get_user('msalvi96')
+
+
+        self.assertEqual(resp, value)
             
 
         # assert_is_not_none(response)
 
 if __name__ == "__main__":
     unittest.main(exit=False, verbosity=2)
-    x, y = get_user('msalvi96', debug=True)
-    print(x, y)
+    # x, y = get_user('msalvi96', debug=True)
+    # print(x, y)
