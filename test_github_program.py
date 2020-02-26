@@ -35,7 +35,7 @@ class TestGetUser(unittest.TestCase):
         for i in expected:
             self.assertIn(i, output_list)
     
-    def test_mock_get_user(self, mock_get):
+    def test_mock_get_user(self):
 
         response_mock = mock.Mock()
         response_mock.status_code = 200
