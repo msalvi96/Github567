@@ -54,7 +54,8 @@ class TestGetUser(unittest.TestCase):
             'crypto_site': 5,
             'flask_RESTful': 4,
             'StevensRepo': 3,
-            'GEDCOM_Project': 2
+            'GEDCOM_Project': 2,
+            'LinkSocial': 5
         }
 
         return response_mock
@@ -72,7 +73,8 @@ class TestGetUser(unittest.TestCase):
             'crypto_site',
             'flask_RESTful',
             'StevensRepo',
-            'GEDCOM_Project'
+            'GEDCOM_Project',
+            'LinkSocial'
         ]
         requests = mock.Mock()
         requests.get.side_effect = self.test_mock_get_user
