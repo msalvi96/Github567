@@ -27,7 +27,8 @@ class TestGetUser(unittest.TestCase):
             'crypto_site',
             'flask_RESTful',
             'StevensRepo',
-            'GEDCOM_Project'
+            'GEDCOM_Project',
+            'PeekList'
         ]
 
         output_list = get_user('msalvi96', debug=True)
@@ -56,7 +57,8 @@ class TestGetUser(unittest.TestCase):
             'StevensRepo': 3,
             'GEDCOM_Project': 2,
             'LinkSocial': 5,
-            'Github567': 7
+            'Github567': 7,
+            'PeekList': 7
         }
 
         return response_mock
@@ -76,7 +78,8 @@ class TestGetUser(unittest.TestCase):
             'StevensRepo',
             'GEDCOM_Project',
             'LinkSocial',
-            'Github567'
+            'Github567',
+            'PeekList'
         ]
         requests = mock.Mock()
         requests.get.side_effect = self.test_mock_get_user
