@@ -11,15 +11,13 @@ def get_user(username, debug=False):
 
     summary = []
     repos = response.json()
-    print(repos)
 
     for rep in repos:
         commits = requests.get(f"https://api.github.com/repos/{username}/{rep['name']}/commits").json()
         summary.append([rep['name'], len(commits)])
 
     if debug:
-        # return [repo[0] for repo in summary]
-        return response, repos
+        return [repo[0] for repo in summary]
 
     return sorted(summary, key=itemgetter(1))
 
@@ -41,4 +39,3 @@ def main():
 
 if __name__ == "__main__":
     x, y = main()
-    print(x, y)
