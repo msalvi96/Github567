@@ -12,6 +12,9 @@ class TestGetUser(unittest.TestCase):
         with self.assertRaises(TimeoutError):
             x = get_user('fwekfbewhkfbhkewfsdvdscdsc')
 
+        response = get_user('msalvi96')
+        assert_is_not_none(response)
+
     def test_output(self):
         
         expected = [
@@ -31,10 +34,9 @@ class TestGetUser(unittest.TestCase):
         for i in expected:
             self.assertIn(i, output_list)
 
-    def test_request_response(self):
+    # def test_request_response(self):
 
-        response = get_user('msalvi96')
-        assert_is_not_none(response)
+
 
     @mock.patch('requests.get')
     def test_mock_get_user(self, mock_get):
@@ -62,7 +64,15 @@ class TestGetUser(unittest.TestCase):
     def test_mock_user(self):
         requests = mock.Mock()
         requests.get.side_effect = self.test_mock_get_user
-        self.assertEqual(get_user('msalvi96')['Software-Testing'], 11)
+        x = get_user('msalvi96')
+        # print(x)
+        output = {}
+        for i in x:
+            output[i[0]] = i[1]
+
+        self.assertTrue(output['Software-Testing'] == 11)
+
+        # self.assertTrue(get_user('msalvi96')['Software-Testing'] == 11)
             
 
         # assert_is_not_none(response)
