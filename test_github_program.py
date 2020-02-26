@@ -59,7 +59,7 @@ class TestGetUser(unittest.TestCase):
         return response_mock
 
     @mock.patch('requests.get')
-    def test_mock_user(self):
+    def test_mock_user(self, mock_get):
         expected = [
             'Software-Testing',
             'delicious_food_blog',
