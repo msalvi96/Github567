@@ -62,6 +62,18 @@ class TestGetUser(unittest.TestCase):
         # mock_get.return_value = mock.Mock(ok=True)
         # mock_get.return_value.json.return_value = value
     def test_mock_user(self):
+        expected = [
+            'Software-Testing',
+            'delicious_food_blog',
+            'CCAssist',
+            'Triangle-567',
+            'Portfolio',
+            'Twitter-Sentiment-Analysis',
+            'crypto_site',
+            'flask_RESTful',
+            'StevensRepo',
+            'GEDCOM_Project'
+        ]
         requests = mock.Mock()
         requests.get.side_effect = self.test_mock_get_user
         x = get_user('msalvi96')
@@ -71,7 +83,10 @@ class TestGetUser(unittest.TestCase):
             output[i[0]] = i[1]
 
         print(output)
-        self.assertTrue(output['Software-Testing'] == 11)
+        # self.assertTrue(output['Software-Testing'] == 11)
+        for key, values in output.items():
+            self.assertIn(key, expected)
+            self.assertIsInstance(values, int)
 
         # self.assertTrue(get_user('msalvi96')['Software-Testing'] == 11)
             
